@@ -7,6 +7,8 @@ import reducer from './api/reducers';
 
 
 import Teste from './modules/teste';
+import Play from './modules/play';
+
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducer, compose(applyMiddleware(sagaMiddleware)), );
 
@@ -15,7 +17,7 @@ class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <Teste />
+                <Play />
             </Provider>
         );
     }
