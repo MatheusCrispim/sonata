@@ -10,7 +10,7 @@ export default class Play extends Component {
     render(){
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={styles.playButton}> 
+                <TouchableOpacity style={styles.playButton} onPress={() => this.props.navigation.navigate('Teste')}> 
                     <Icon name="play" size={60} color="#49BD36" style={{marginLeft: 5}} />
                 </TouchableOpacity>
             </View>
