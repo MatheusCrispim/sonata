@@ -15,7 +15,7 @@ export default class Play extends Component {
                 <Image style={styles.thirdCloud}  source={require('../assets/images/third-cloud.png')} />
                 <Image style={styles.fourthCloud}  source={require('../assets/images/fourth-cloud.png')} />
 
-                <TouchableOpacity style={styles.playButton} onPress={() => this.props.navigation.navigate('Teste')}> 
+                <TouchableOpacity style={styles.playButton} onPress={() => this.props.navigation.navigate('Context')}> 
                     <Icon name="play" size={70} color="#49BD36" style={{marginLeft: 5}} />
                 </TouchableOpacity>
             </View>
