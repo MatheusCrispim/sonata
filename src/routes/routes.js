@@ -2,6 +2,7 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import Play from '../modules/play'
 import Teste from '../modules/teste'
+import Context from '../modules/context'
 
 const Root = createStackNavigator({
     Home: {
@@ -10,8 +11,23 @@ const Root = createStackNavigator({
             headerTransparent: true
         },
     },
+    Context: {
+        screen: Context,
+        navigationOptions: {
+            headerStyle: {
+                backgroundColor: '#04A1E3'
+            },
+            headerTintColor: '#ffffff'
+        },
+    },
     Teste: {
-        screen: Teste
+        screen: Teste,
+        navigationOptions: {
+            headerStyle: {
+                backgroundColor: '#04A1E3'
+            },
+            headerTintColor: '#ffffff'
+        },
     }
 });
 
