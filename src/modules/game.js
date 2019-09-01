@@ -33,6 +33,9 @@ export default class Game extends Component {
                     </View>
                     <View style={styles.containerImage}>
                         <Image style={styles.image} source={require('../assets/images/car.png')} />
+                        <TouchableOpacity style={styles.sound} onPress={() => alert('Saída de som')}>
+                            <Sound  name="sound" size={40} color="#000"></Sound>
+                        </TouchableOpacity>
                     </View>
                 </View>
 
@@ -126,16 +129,16 @@ const styles = StyleSheet.create({
     letter: {
         fontSize: 70,
         fontWeight: 'bold',
-        color: '#EFCE4A'
+        color: '#EFCE4A',
+        marginRight: 10
     },
 
     sound: {
-        alignSelf: 'center',
-        marginLeft: 10
+        alignSelf: 'center',        
     },
 
     containerImage: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         marginTop: 30,
         width: 248,
         height: 206,
@@ -151,7 +154,8 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginBottom: 10
     },
 
     containerButtons: {
