@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
         borderRadius:70,
         marginBottom: 78,
         shadowColor: 'black',
-        shadowOpacity: 0.9,
-        elevation: 8,
+        shadowOpacity: 1,
+        elevation: 10,
     },
 
     firstCloud: {

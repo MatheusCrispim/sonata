@@ -12,7 +12,7 @@ export default class Context extends Component {
                     <Text style={styles.title}>Escolha onde você quer jogar ?</Text>
                 </View>
                 <View style={styles.firstLine}>
-                    <TouchableOpacity style={{marginRight: 'auto'}} onPress={() => alert('Animais')}>
+                    <TouchableOpacity style={{marginRight: 'auto'}} onPress={() => this.props.navigation.navigate('Game')}>
                         <View style={styles.firstSquary}>
                             <Text>Animais</Text>
                         </View>
