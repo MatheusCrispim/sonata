@@ -12,12 +12,12 @@ export default class Context extends Component {
                     <Text style={styles.title}>Escolha onde você quer jogar ?</Text>
                 </View>
                 <View style={styles.firstLine}>
-                    <TouchableOpacity style={{marginRight: 'auto'}} onPress={() => this.props.navigation.navigate('Game')}>
+                    <TouchableOpacity style={{marginRight: 'auto'}} onPress={() => this.props.navigation.navigate('Letters')}>
                         <View style={styles.firstSquary}>
                             <Text>Animais</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{marginLeft: 'auto'}} onPress={() => alert('Casa')}>
+                    <TouchableOpacity style={{marginLeft: 'auto'}} onPress={() => this.props.navigation.navigate('Letters')}>
                         <View style={styles.secondSquary}>
                             <Text>Casa</Text>
                         </View>
