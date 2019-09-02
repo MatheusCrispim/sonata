@@ -8,7 +8,11 @@ import Sound from 'react-native-vector-icons/AntDesign';
 // import { Container } from './styles';
 
 export default class Game extends Component {
+
     render() {
+
+        const letra = this.props.navigation.state.params;
+
         return (
             <View style={styles.container}>
                 <Image style={styles.firstCloud} source={require('../assets/images/first-cloud.png')} />
@@ -26,7 +30,7 @@ export default class Game extends Component {
 
                 <View style={styles.containerCenter}>
                     <View style={styles.containerLetter}>
-                        <Text style={styles.letter}>A</Text>
+                        <Text style={styles.letter}>{letra}</Text>
                         <TouchableOpacity style={styles.sound} onPress={() => alert('Saída de som')}>
                             <Sound  name="sound" size={40} color="#000"></Sound>
                         </TouchableOpacity>                        
@@ -130,7 +134,8 @@ const styles = StyleSheet.create({
         fontSize: 70,
         fontWeight: 'bold',
         color: '#EFCE4A',
-        marginRight: 10
+        marginRight: 10,
+        alignSelf:'center'
     },
 
     sound: {
