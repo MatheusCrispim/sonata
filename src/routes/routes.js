@@ -5,6 +5,8 @@ import Teste from '../modules/teste'
 import Context from '../modules/context'
 import Game from '../modules/game'
 import Letters from '../modules/letters'
+import Win from '../modules/win'
+import Lose from '../modules/lose'
 
 const Root = createStackNavigator({
     Home: {
@@ -48,6 +50,22 @@ const Root = createStackNavigator({
             },
             headerTintColor: '#ffffff',
         },
+    },
+
+    Win: {
+        screen: Win,
+        navigationOptions: {
+            headerTransparent: true,
+            headerTintColor: '#ffffff'
+        }
+    },
+
+    Lose: {
+        screen: Lose,
+        navigationOptions: {
+            headerTransparent: true,
+            headerTintColor: '#ffffff'
+        }
     }
 },{
     headerLayoutPreset: 'center'
