@@ -1,119 +1,104 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Image, ImageBackground } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 // import { Container } from './styles';
 
 export default class Context extends Component {
 
+    static navigationOptions = {
+        headerTitleStyle: { alignSelf: 'center' },
+        title: 'TIPO DE JOGO',
+    };
+
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.containerTitle}>
-                    <Text style={styles.title}>Escolha onde você quer jogar ?</Text>
-                </View>
-                <View style={styles.firstLine}>
-                    <TouchableOpacity style={{marginRight: 'auto'}} onPress={() => this.props.navigation.navigate('Letters')}>
-                        <View style={styles.firstSquary}>
-                            <Text>Animais</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{marginLeft: 'auto'}} onPress={() => this.props.navigation.navigate('Letters')}>
-                        <View style={styles.secondSquary}>
-                            <Text>Casa</Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
+                <ScrollView >
 
-                <View style={styles.secondLine}>
-                    <TouchableOpacity style={{marginRight: 'auto'}} onPress={() => alert('Escola')}>
-                        <View style={styles.thirdSquary}>
-                            <Text>Escola</Text>
+                    <TouchableOpacity style={styles.contentTouch}>
+                        <View style={[styles.contentView, {marginTop:58}]}>
+                            <Text style={{ color: "#FFF", fontSize: 18, marginBottom: -33 }}>FRUTAS</Text>
+                            <ImageBackground source={require("../assets/images/cloud.png")} style={styles.contentImageBackground}>
+                                <View style={{ justifyContent: 'center', alignSelf: 'center' }}>
+                                    <Image source={require("../assets/images/frutas.png")} style={styles.contentImage}>
+                                    </Image>
+                                </View>
+                            </ImageBackground>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{marginLeft: 'auto'}} onPress={() => alert('Frutas')}>
-                        <View style={styles.fourthSquare}>
-                            <Text>Frutas</Text>
+                    <TouchableOpacity style={styles.contentTouch}>
+                        <View style={styles.contentView}>
+                            <Text style={{ color: "#FFF", fontSize: 18, marginBottom: -33 }}>ANIMAIS</Text>
+                            <ImageBackground source={require("../assets/images/cloud.png")} style={styles.contentImageBackground}>
+                                <View style={{ justifyContent: 'center', alignSelf: 'center' }}>
+                                    <Image source={require("../assets/images/animais.png")} style={styles.contentImage}>
+                                    </Image>
+                                </View>
+                            </ImageBackground>
                         </View>
                     </TouchableOpacity>
-                </View>
+                    <TouchableOpacity style={styles.contentTouch}>
+                        <View style={styles.contentView}>
+                            <Text style={{ color: "#FFF", fontSize: 18, marginBottom: -33 }}>ESCOLA</Text>
+                            <ImageBackground source={require("../assets/images/cloud.png")} style={styles.contentImageBackground}>
+                                <View style={{ justifyContent: 'center', alignSelf: 'center' }}>
+                                    <Image source={require("../assets/images/escola.png")} style={styles.contentImage}>
+                                    </Image>
+                                </View>
+                            </ImageBackground>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.contentTouch}>
+                        <View style={[styles.contentView, {marginBottom:38}]}>
+                            <Text style={{ color: "#FFF", fontSize: 18, marginBottom: -33 }}>CASA</Text>
+                            <ImageBackground source={require("../assets/images/cloud.png")} style={styles.contentImageBackground}>
+                                <View style={{ justifyContent: 'center', alignSelf: 'center' }}>
+                                    <Image source={require("../assets/images/casa.png")} style={styles.contentImage}>
+                                    </Image>
+                                </View>
+                            </ImageBackground>
+                        </View>
+                    </TouchableOpacity>
+                </ScrollView>
             </View>
+
         )
     }
 }
 
 const styles = StyleSheet.create({
+
     container: {
         flex: 1,
         backgroundColor: '#50B3DD',
         justifyContent: 'center',
     },
 
-    containerTitle: {
-        alignItems: 'center',
-        marginBottom: 30,
+    contentTouch: {
+        justifyContent: 'center',
+        alignSelf: 'center',
+
     },
 
-    title: {
-        fontSize: 35,
-        color: '#fff',
-        fontWeight: 'bold',
-        marginHorizontal: 20,
-        textAlign: 'center',
-    },
-
-    firstLine: {
-        flexDirection: "row",
-        margin: 20,
-    },
-
-    secondLine: {
-        flexDirection: "row",
-        margin: 20,
-    },
-
-    firstSquary: {
-        borderRadius: 20,
-        backgroundColor: '#fff',
-        borderWidth: 5,
-        borderColor: '#86D5FE',
-        width: 140,
-        height: 120,
+    contentView: {
+        height: 260,
+        width: 280,
+        marginBottom: -32,
         justifyContent: 'center',
         alignItems: 'center'
     },
 
-    secondSquary: {
-        borderRadius: 20,
-        backgroundColor: '#fff',
-        borderWidth: 5,
-        borderColor: '#86D5FE',
-        width: 140,
-        height: 120,
+    contentImageBackground: {
+        height: '100%',
+        width: '100%',
         justifyContent: 'center',
         alignItems: 'center'
     },
 
-    thirdSquary: {
-        borderRadius: 20,
-        backgroundColor: '#fff',
-        borderWidth: 5,
-        borderColor: '#86D5FE',
-        width: 140,
-        height: 120,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-
-    fourthSquare: {
-        borderRadius: 20,
-        backgroundColor: '#fff',
-        borderWidth: 5,
-        borderColor: '#86D5FE',
-        width: 140,
-        height: 120,
-        justifyContent: 'center',
-        alignItems: 'center'
+    contentImage: {
+        alignSelf: 'center',
+        justifyContent: 'center'
     }
-
 
 })
