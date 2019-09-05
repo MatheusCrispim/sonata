@@ -1,7 +1,7 @@
 import { takeLatest, all, call, put } from 'redux-saga/effects';
 import { Service } from '../../services/service';
 import { UserTypes } from '../actions/types';
-import { loginSuccess, loginfail, signupSuccess, signupFail, getUserSuccess, login } from '../actions/user.actions';
+import { loginSuccess, loginfail, signupSuccess, signupFail, getUserSuccess, login } from '../actions/actions';
 const { LOGIN, SIGNUP, GET_USER } = UserTypes;
 
 const { get, post } = new Service();

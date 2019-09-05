@@ -3,6 +3,7 @@ import {  ChallengeTypes  } from '../actions/types';
 
 const { 
     GET_CHALLENGE, 
+    GET_CONTEXT_CHALLENGES,
     REGISTER_CHALLENGE,
     UPDATE_CHALLENGE,
     DELETE_CHALLENGE,
@@ -14,6 +15,10 @@ export default handleActions(
         [
             GET_CHALLENGE,
             (state, action)=>({loading: true, data:[...state.data], requested:false, success:false, action:GET_CHALLENGE})
+        ],
+        [
+            GET_CONTEXT_CHALLENGES,
+            (state, action)=>({loading: true, data:[...state.data], requested:false, success:false, action:GET_CONTEXT_CHALLENGES})
         ],
         [
             REGISTER_CHALLENGE,

@@ -2,7 +2,7 @@ import { getToken } from "../../utils/user.utils";
 
 const BASE_PATH = 'https://app.sisalfa.dcx.ufpb.br/v1/api'
 
-export  class Service{
+export class Service{
 
     constructor(){
         this.header = new Headers({

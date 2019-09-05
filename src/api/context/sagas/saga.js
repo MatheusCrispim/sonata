@@ -24,7 +24,6 @@ export function* rootContextSaga(){
 
 
 function* getContextSaga(action){
-
     try{
         let response = yield call(get, endpoint);
 
