@@ -20,7 +20,6 @@ class Teste extends Component{
 
     getContext = ()=>{
         this.props.dispatch(getContext());
-
         alert(JSON.stringify(this.props.contexts));
     }
 
@@ -29,9 +28,7 @@ class Teste extends Component{
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
             <Text>Hello, world!</Text>
             <Button
-                onPress={
-                    this.getContext
-                }
+                onPress={ this.getContext}
                 title="Press Me"/>
         </View>
         );
