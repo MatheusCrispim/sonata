@@ -4,13 +4,41 @@ import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Sound from 'react-native-vector-icons/AntDesign';
+import { connect }  from 'react-redux';
 
 // import { Container } from './styles';
 
-export default class Game extends Component {
+class Game extends Component {
+
+    state = {
+        challengeId: 0,
+        currentChallenge: {image:'', sound: '', word: ''}
+    }
+
+    componentDidMount(props){
+        if(this.props.challenges.data > 0){
+            this.setState({currentChallenge: this.props.challenges.data[0]});
+        }
+    }
+
+
+    componentDidUpdate(prevProps, prevState){
+        if(prevProps !== this.props){
+            this.setState({currentChallenge: this.props.challenges.data[0]});
+        }
+    }
+
+    correct = ()=>{
+        let challengeId = this.state.challengeId+1;
+        this.setState({currentChallenge: this.props.challenges.data[challengeId], challengeId: challengeId});
+    }
+
+    wrong = ()=>{
+        let challengeId = this.state.challengeId+1;
+        this.setState({currentChallenge: this.props.challenges.data[challengeId], challengeId: challengeId});
+    }
 
     render() {
-
         const letra = this.props.navigation.state.params;
 
         return (
@@ -36,7 +64,9 @@ export default class Game extends Component {
                         </TouchableOpacity>                        
                     </View>
                     <View style={styles.containerImage}>
-                        <Image style={styles.image} source={require('../assets/images/car.png')} />
+
+                        <Image source={{uri: this.state.currentChallenge.image}} style={{height:100, resizeMode:'stretch' ,margin: 5 }}  />
+
                         <TouchableOpacity style={styles.sound} onPress={() => alert('Saída de som')}>
                             <Sound  name="sound" size={40} color="#000"></Sound>
                         </TouchableOpacity>
@@ -44,10 +74,10 @@ export default class Game extends Component {
                 </View>
 
                 <View style={styles.containerButtons}>
-                    <TouchableOpacity style={styles.buttonRed}  onPress={() => alert('Errado')}>
+                    <TouchableOpacity style={styles.buttonRed}  onPress={this.wrong}>
                         <Icon name="close" size={50} color="#fff"  />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGreen} onPress={() => alert('Correto')}>
+                    <TouchableOpacity style={styles.buttonGreen} onPress={this.correct}>
                         <Icon name="check" size={50} color="#fff" />
                     </TouchableOpacity>
                 </View>
@@ -159,8 +189,13 @@ const styles = StyleSheet.create({
     },
 
     image: {
+        height: 100, 
+        width: 'auto',
+        resizeMode : 'stretch',
         alignSelf: 'center',
         marginBottom: 10,
+        width: 180,
+        height: 101,
     },
 
     containerButtons: {
@@ -194,3 +229,9 @@ const styles = StyleSheet.create({
     },
 
 })
+
+const mapStateToProps = (state)=>({
+    challenges: state.challenge
+});
+
+export default connect(mapStateToProps)(Game);
