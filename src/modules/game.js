@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 
 import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Sound from 'react-native-vector-icons/AntDesign';
-import { connect }  from 'react-redux';
+import { connect } from 'react-redux';
 
 // import { Container } from './styles';
 
@@ -12,35 +12,48 @@ class Game extends Component {
 
     state = {
         challengeId: 0,
-        currentChallenge: {image:'', sound: '', word: ''}
+        currentChallenge: { image: '', sound: '', word: '' },
+        hits: 0,
+        stars: 5,
     }
 
-    componentDidMount(props){
-        if(this.props.challenges.data > 0){
-            this.setState({currentChallenge: this.props.challenges.data[0]});
+    componentDidMount(props) {
+        if (this.props.challenges.data.length > 0) {
+            this.setState({ currentChallenge: this.props.challenges.data[0] });
         }
     }
 
 
-    componentDidUpdate(prevProps, prevState){
-        if(prevProps !== this.props){
-            this.setState({currentChallenge: this.props.challenges.data[0]});
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps !== this.props) {
+            this.setState({ currentChallenge: this.props.challenges.data[0] });
         }
     }
 
-    correct = ()=>{
-        let challengeId = this.state.challengeId+1;
-        this.setState({currentChallenge: this.props.challenges.data[challengeId], challengeId: challengeId});
+    correct = () => {
+        const letra = this.props.navigation.state.params
+        if (this.state.currentChallenge.word.startsWith(letra)) {
+            this.state.hits++;
+        } else {
+            this.state.stars--;
+        }
+        let challengeId = this.state.challengeId + 1;
+        this.setState({ currentChallenge: this.props.challenges.data[challengeId], challengeId: challengeId });
     }
 
-    wrong = ()=>{
-        let challengeId = this.state.challengeId+1;
-        this.setState({currentChallenge: this.props.challenges.data[challengeId], challengeId: challengeId});
+    wrong = () => {
+        const letra = this.props.navigation.state.params
+        if (!this.state.currentChallenge.word.startsWith(letra)) {
+            this.state.hits++;
+        } else {
+            this.state.stars--;
+        }
+        let challengeId = this.state.challengeId + 1;
+        this.setState({ currentChallenge: this.props.challenges.data[challengeId], challengeId: challengeId });
     }
 
     render() {
         const letra = this.props.navigation.state.params;
-
         return (
             <View style={styles.container}>
                 <Image style={styles.firstCloud} source={require('../assets/images/first-cloud.png')} />
@@ -49,33 +62,33 @@ class Game extends Component {
                 <Image style={styles.fourthCloud} source={require('../assets/images/fourth-cloud.png')} />
 
                 <View style={styles.containerStars}>
-                    <Icon name="star" size={50} color="#EFCE4A"  />
-                    <Icon name="star" size={50} color="#EFCE4A"  />
-                    <Icon name="star" size={50} color="#EFCE4A"  />
-                    <Icon name="star" size={50} color="#EFCE4A"  />
-                    <Icon name="star" size={50} color="#EFCE4A"  />
+                    <Icon name="star" size={50} color="#EFCE4A" />
+                    <Icon name="star" size={50} color="#EFCE4A" />
+                    <Icon name="star" size={50} color="#EFCE4A" />
+                    <Icon name="star" size={50} color="#EFCE4A" />
+                    <Icon name="star" size={50} color="#EFCE4A" />
                 </View>
 
                 <View style={styles.containerCenter}>
                     <View style={styles.containerLetter}>
                         <Text style={styles.letter}>{letra}</Text>
-                        <TouchableOpacity style={styles.sound} onPress={() => alert('Saída de som')}>
-                            <Sound  name="sound" size={40} color="#000"></Sound>
-                        </TouchableOpacity>                        
+                        <TouchableOpacity style={styles.sound} onPress={() => console.log(this.props.challenges.data[0])}>
+                            <Sound name="sound" size={40} color="#000"></Sound>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.containerImage}>
 
-                        <Image source={{uri: this.state.currentChallenge.image}} style={{height:100, resizeMode:'stretch' ,margin: 5 }}  />
+                        <Image source={{ uri: this.state.currentChallenge.image }} style={{ height: 100, resizeMode: 'stretch', margin: 5 }} />
 
-                        <TouchableOpacity style={styles.sound} onPress={() => alert('Saída de som')}>
-                            <Sound  name="sound" size={40} color="#000"></Sound>
+                        <TouchableOpacity style={styles.sound} onPress={() => console.log(this.state.currentChallenge)}>
+                            <Sound name="sound" size={40} color="#000"></Sound>
                         </TouchableOpacity>
                     </View>
                 </View>
 
                 <View style={styles.containerButtons}>
-                    <TouchableOpacity style={styles.buttonRed}  onPress={this.wrong}>
-                        <Icon name="close" size={50} color="#fff"  />
+                    <TouchableOpacity style={styles.buttonRed} onPress={this.wrong}>
+                        <Icon name="close" size={50} color="#fff" />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.buttonGreen} onPress={this.correct}>
                         <Icon name="check" size={50} color="#fff" />
@@ -165,7 +178,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#EFCE4A',
         marginRight: 10,
-        alignSelf:'center'
+        alignSelf: 'center'
     },
 
     sound: {
@@ -189,9 +202,9 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        height: 100, 
+        height: 100,
         width: 'auto',
-        resizeMode : 'stretch',
+        resizeMode: 'stretch',
         alignSelf: 'center',
         marginBottom: 10,
         width: 180,
@@ -230,7 +243,7 @@ const styles = StyleSheet.create({
 
 })
 
-const mapStateToProps = (state)=>({
+const mapStateToProps = (state) => ({
     challenges: state.challenge
 });
 
