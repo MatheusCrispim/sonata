@@ -7,6 +7,10 @@ import Icon from 'react-native-vector-icons/Feather';
 
 export default class extends Component {
 
+    returnLetters() {
+        this.props.navigation.navigate('Letters');
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -14,7 +18,7 @@ export default class extends Component {
                     <View style={styles.containerView}>
                         <Image source={require("../assets/images/congratulations.png")} style={{justifyContent: 'flex-start', margin: 10}}/>
                         <Image source={require("../assets/images/ghost.png")} style={{justifyContent: 'center', margin: 10}}/>
-                        <TouchableOpacity style={styles.btnArrow}>
+                        <TouchableOpacity style={styles.btnArrow} onPress={() => this.returnLetters()}>
                             <Icon name="arrow-left" size={40} color="#fff" />
                         </TouchableOpacity>
                     </View>

@@ -5,6 +5,7 @@ import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Sound from 'react-native-vector-icons/AntDesign';
 import { connect } from 'react-redux';
+// import Sound1 from 'react-native-sound';
 
 // import { Container } from './styles';
 
@@ -15,41 +16,68 @@ class Game extends Component {
         currentChallenge: { image: '', sound: '', word: '' },
         hits: 0,
         stars: 5,
+        list: [],
+        move: 9
+    }
+
+    shuffle(array) {
+        var ctr = array.length, temp, index;
+    
+        while (ctr > 0) {
+            index = Math.floor(Math.random() * ctr);
+            ctr--;
+            temp = array[ctr];
+            array[ctr] = array[index];
+            array[index] = temp;
+        }
+        return array;
     }
 
     componentDidMount(props) {
         if (this.props.challenges.data.length > 0) {
-            this.setState({ currentChallenge: this.props.challenges.data[0] });
+            this.state.list = this.shuffle(this.props.challenges.data);
+            this.setState({ currentChallenge: this.state.list[0] });
         }
     }
 
 
     componentDidUpdate(prevProps, prevState) {
+        this.endGame();
         if (prevProps !== this.props) {
-            this.setState({ currentChallenge: this.props.challenges.data[0] });
+            this.setState({ currentChallenge: this.state.list[0] });
         }
     }
 
     correct = () => {
-        const letra = this.props.navigation.state.params
-        if (this.state.currentChallenge.word.startsWith(letra)) {
+        let letra = this.props.navigation.state.params
+        if (this.state.currentChallenge.word.toUpperCase().startsWith(letra)) {
             this.state.hits++;
         } else {
             this.state.stars--;
         }
         let challengeId = this.state.challengeId + 1;
-        this.setState({ currentChallenge: this.props.challenges.data[challengeId], challengeId: challengeId });
+        this.setState({ currentChallenge: this.state.list[challengeId], challengeId: challengeId });
     }
 
     wrong = () => {
         const letra = this.props.navigation.state.params
-        if (!this.state.currentChallenge.word.startsWith(letra)) {
+        if (!this.state.currentChallenge.word.toUpperCase().startsWith(letra)) {
             this.state.hits++;
         } else {
             this.state.stars--;
         }
         let challengeId = this.state.challengeId + 1;
-        this.setState({ currentChallenge: this.props.challenges.data[challengeId], challengeId: challengeId });
+        this.setState({ currentChallenge: this.state.list[challengeId], challengeId: challengeId });
+    }
+
+    endGame() {
+        if (this.state.stars === 0) {            
+            this.props.navigation.navigate('Lose')
+        }
+
+        if (this.state.hits === 5) {            
+            this.props.navigation.navigate('Win')
+        }
     }
 
     render() {
@@ -62,11 +90,11 @@ class Game extends Component {
                 <Image style={styles.fourthCloud} source={require('../assets/images/fourth-cloud.png')} />
 
                 <View style={styles.containerStars}>
-                    <Icon name="star" size={50} color="#EFCE4A" />
-                    <Icon name="star" size={50} color="#EFCE4A" />
-                    <Icon name="star" size={50} color="#EFCE4A" />
-                    <Icon name="star" size={50} color="#EFCE4A" />
-                    <Icon name="star" size={50} color="#EFCE4A" />
+                    <Icon name="star" size={50} color={this.state.stars >= 1 ? "#EFCE4A" : '#808080'} />
+                    <Icon name="star" size={50} color={this.state.stars >= 2 ? "#EFCE4A" : '#808080'} />
+                    <Icon name="star" size={50} color={this.state.stars >= 3 ? "#EFCE4A" : '#808080'} />
+                    <Icon name="star" size={50} color={this.state.stars >= 4 ? "#EFCE4A" : '#808080'} />
+                    <Icon name="star" size={50} color={this.state.stars === 5 ? "#EFCE4A" : '#808080'} />
                 </View>
 
                 <View style={styles.containerCenter}>
