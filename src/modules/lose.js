@@ -8,6 +8,14 @@ import Icon2 from 'react-native-vector-icons/MaterialIcons';
 
 export default class extends Component {
 
+    navigateToGame() {
+        this.props.navigation.navigate('Letters')
+    }
+
+    navigateToContexts() {
+        this.props.navigation.navigate('Context')
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -16,10 +24,10 @@ export default class extends Component {
                         <Image source={require("../assets/images/lose.png")} style={{justifyContent: 'flex-start', marginTop: 29}}/>
                         <Image source={require("../assets/images/ghost2.png")} style={{justifyContent: 'center', margin: 20}}/>
                         <View style={styles.containerButtons}>
-                            <TouchableOpacity style={styles.btnRed}  onPress={() => alert('Sair')}>
+                            <TouchableOpacity style={styles.btnRed}  onPress={() => this.navigateToContexts()}>
                                 <Icon2 name="close" size={50} color="#000"  />
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.btnGreen} onPress={() => alert('Recomeçar')}>
+                            <TouchableOpacity style={styles.btnGreen} onPress={() => this.navigateToGame()}>
                                 <Icon2 name="replay" size={50} color="#000" />
                             </TouchableOpacity>
                         </View>

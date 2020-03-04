@@ -43,7 +43,9 @@ function* getChallengeSaga(action){
 function* getContextChallengesSaga(action){
     try{
         let id = action.payload;
+        console.log("id >>>>>>>>>>> "+id)
         let response = yield call(get, `${endpoint}/${id}/context`);
+        console.log(endpoint+'/'+id+'/context')
 
         if(response.status === 200){
             let payload = {data: response.data};

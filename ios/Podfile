@@ -29,6 +29,8 @@ target 'sonata' do
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
+  pod 'RNSound', :path => '../node_modules/react-native-sound'
+
   target 'sonataTests' do
     inherit! :search_paths
     # Pods for testing

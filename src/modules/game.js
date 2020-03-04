@@ -5,7 +5,7 @@ import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Sound from 'react-native-vector-icons/AntDesign';
 import { connect } from 'react-redux';
-// import Sound1 from 'react-native-sound';
+import SoundPlayer from 'react-native-sound';
 
 // import { Container } from './styles';
 
@@ -17,12 +17,11 @@ class Game extends Component {
         hits: 0,
         stars: 5,
         list: [],
-        move: 9
     }
 
     shuffle(array) {
         var ctr = array.length, temp, index;
-    
+
         while (ctr > 0) {
             index = Math.floor(Math.random() * ctr);
             ctr--;
@@ -34,6 +33,7 @@ class Game extends Component {
     }
 
     componentDidMount(props) {
+        console.log(JSON.stringify(this.props.challenges.data))
         if (this.props.challenges.data.length > 0) {
             this.state.list = this.shuffle(this.props.challenges.data);
             this.setState({ currentChallenge: this.state.list[0] });
@@ -42,6 +42,7 @@ class Game extends Component {
 
 
     componentDidUpdate(prevProps, prevState) {
+        console.log('jsfksdfhk')
         this.endGame();
         if (prevProps !== this.props) {
             this.setState({ currentChallenge: this.state.list[0] });
@@ -75,9 +76,21 @@ class Game extends Component {
             this.props.navigation.navigate('Lose')
         }
 
-        if (this.state.hits === 5) {            
+        if (this.state.hits === 5) {
             this.props.navigation.navigate('Win')
         }
+    }
+
+
+    playerSound() {
+        const sound = new SoundPlayer('teste.mp3', SoundPlayer.MAIN_BUNDLE, (error) => {
+            if (error) {
+                console.log('error')
+            }
+
+            // console.log(sound.play())
+            sound.play();
+        });
     }
 
     render() {
@@ -100,7 +113,7 @@ class Game extends Component {
                 <View style={styles.containerCenter}>
                     <View style={styles.containerLetter}>
                         <Text style={styles.letter}>{letra}</Text>
-                        <TouchableOpacity style={styles.sound} onPress={() => console.log(this.props.challenges.data[0])}>
+                        <TouchableOpacity style={styles.sound} onPress={() => this.playerSound()}>
                             <Sound name="sound" size={40} color="#000"></Sound>
                         </TouchableOpacity>
                     </View>
