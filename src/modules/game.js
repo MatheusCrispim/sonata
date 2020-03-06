@@ -1,11 +1,17 @@
 import React, { Component, useEffect, useState } from 'react';
 
-import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, Text, TouchableOpacity, Button } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Sound from 'react-native-vector-icons/AntDesign';
 import { connect } from 'react-redux';
+
 import SoundPlayer from 'react-native-sound';
+import Modal from "react-native-modal";
+
+import { alghoritmRandom, shuffle } from '../utils/alghoritms'
+
+
 
 // import { Container } from './styles';
 
@@ -17,6 +23,7 @@ class Game extends Component {
         hits: 0,
         stars: 5,
         list: [],
+        showModal: true
     }
 
     shuffle(array) {
@@ -33,16 +40,17 @@ class Game extends Component {
     }
 
     componentDidMount(props) {
-        console.log(JSON.stringify(this.props.challenges.data))
         if (this.props.challenges.data.length > 0) {
-            this.state.list = this.shuffle(this.props.challenges.data);
+            this.state.list = alghoritmRandom(this.props.challenges.data, this.props.navigation.state.params);
             this.setState({ currentChallenge: this.state.list[0] });
+            setTimeout(() => {
+                this.setState({ showModal: false })
+            }, 2000)
         }
     }
 
 
     componentDidUpdate(prevProps, prevState) {
-        console.log('jsfksdfhk')
         this.endGame();
         if (prevProps !== this.props) {
             this.setState({ currentChallenge: this.state.list[0] });
@@ -53,26 +61,35 @@ class Game extends Component {
         let letra = this.props.navigation.state.params
         if (this.state.currentChallenge.word.toUpperCase().startsWith(letra)) {
             this.state.hits++;
+            this.hitSound();
         } else {
             this.state.stars--;
         }
+
         let challengeId = this.state.challengeId + 1;
         this.setState({ currentChallenge: this.state.list[challengeId], challengeId: challengeId });
+
+
     }
 
     wrong = () => {
         const letra = this.props.navigation.state.params
         if (!this.state.currentChallenge.word.toUpperCase().startsWith(letra)) {
             this.state.hits++;
+            console.log(this.hits)
+            this.hitSound();
         } else {
             this.state.stars--;
         }
+
         let challengeId = this.state.challengeId + 1;
         this.setState({ currentChallenge: this.state.list[challengeId], challengeId: challengeId });
+
     }
 
     endGame() {
-        if (this.state.stars === 0) {            
+
+        if (this.state.stars === 0) {
             this.props.navigation.navigate('Lose')
         }
 
@@ -80,6 +97,18 @@ class Game extends Component {
             this.props.navigation.navigate('Win')
         }
     }
+
+    showModal = () => {
+        this.setState({
+            showModal: true
+        });
+    };
+
+    hideModal = () => {
+        this.setState({
+            showModal: false
+        });
+    };
 
 
     playerSound() {
@@ -93,10 +122,37 @@ class Game extends Component {
         });
     }
 
+    hitSound() {
+        const sound = new SoundPlayer('yeah.mp3', SoundPlayer.MAIN_BUNDLE, (error) => {
+            if (error) {
+                console.log('error')
+            }
+            sound.play();
+        });
+    }
+
+    toggleModal = () => {
+        this.setState({ showModal: !this.state.showModal });
+    };
+
+    alghoritmRamdom
+
     render() {
         const letra = this.props.navigation.state.params;
+        const { showAlert } = this.state;
         return (
             <View style={styles.container}>
+
+                <Modal isVisible={this.state.showModal} backdropOpacity={0.5} animationInTiming={600} animationOutTiming={800}>
+                    <View style={styles.modal}>
+                        <Image
+                            source={require('../assets/images/load.gif')}
+                            style={{ width: 100, height: 100 }}
+                        />
+                        <Text>Carregando jogo...</Text>
+                    </View>
+                </Modal>
+
                 <Image style={styles.firstCloud} source={require('../assets/images/first-cloud.png')} />
                 <Image style={styles.secondCloud} source={require('../assets/images/second-cloud.png')} />
                 <Image style={styles.thirdCloud} source={require('../assets/images/third-cloud.png')} />
@@ -121,7 +177,7 @@ class Game extends Component {
 
                         <Image source={{ uri: this.state.currentChallenge.image }} style={{ height: 100, resizeMode: 'stretch', margin: 5 }} />
 
-                        <TouchableOpacity style={styles.sound} onPress={() => console.log(this.state.currentChallenge)}>
+                        <TouchableOpacity style={styles.sound} onPress={this.toggleModal}>
                             <Sound name="sound" size={40} color="#000"></Sound>
                         </TouchableOpacity>
                     </View>
@@ -281,6 +337,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+
+    modal: {
+        width: 280,
+        height: 200,
+        borderRadius: 10,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center'
+    }
 
 })
 
