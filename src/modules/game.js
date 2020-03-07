@@ -40,6 +40,7 @@ class Game extends Component {
     }
 
     componentDidMount(props) {
+        console.log(this.props.navigation.state.params)
         if (this.props.challenges.data.length > 0) {
             this.state.list = alghoritmRandom(this.props.challenges.data, this.props.navigation.state.params);
             this.setState({ currentChallenge: this.state.list[0] });
@@ -58,7 +59,7 @@ class Game extends Component {
     }
 
     correct = () => {
-        let letra = this.props.navigation.state.params
+        let letra = this.props.navigation.state.params.letra
         if (this.state.currentChallenge.word.toUpperCase().startsWith(letra)) {
             this.state.hits++;
             this.hitSound();
@@ -73,7 +74,7 @@ class Game extends Component {
     }
 
     wrong = () => {
-        const letra = this.props.navigation.state.params
+        const letra = this.props.navigation.state.params.letra
         if (!this.state.currentChallenge.word.toUpperCase().startsWith(letra)) {
             this.state.hits++;
             console.log(this.hits)
@@ -94,7 +95,7 @@ class Game extends Component {
         }
 
         if (this.state.hits === 5) {
-            this.props.navigation.navigate('Win')
+            this.props.navigation.navigate('Win', this.props.navigation.state.params)
         }
     }
 
@@ -138,7 +139,7 @@ class Game extends Component {
     alghoritmRamdom
 
     render() {
-        const letra = this.props.navigation.state.params;
+        const letra = this.props.navigation.state.params.letra;
         const { showAlert } = this.state;
         return (
             <View style={styles.container}>

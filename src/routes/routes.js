@@ -55,17 +55,17 @@ const Root = createStackNavigator({
     Win: {
         screen: Win,
         navigationOptions: {
-            headerTransparent: true,
-            headerTintColor: '#ffffff'
-        }
+            headerLeft: null,
+            headerTransparent: true
+        },
     },
 
     Lose: {
         screen: Lose,
         navigationOptions: {
-            headerTransparent: true,
-            headerTintColor: '#ffffff'
-        }
+            headerLeft: null,
+            headerTransparent: true
+        },
     }
 },{
     headerLayoutPreset: 'center'

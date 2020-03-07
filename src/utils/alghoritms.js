@@ -1,3 +1,5 @@
+import { AsyncStorage } from 'react-native';
+
 export function alghoritmRandom(array, letter) {
     var listChallenges = [];
     var listChallengesLetterCorrect = []
@@ -55,4 +57,34 @@ export function joinLists(array1, array2) {
     });
 
     return listJoined;
+}
+
+export async function verifyLevelCompleted(letters, context) {
+
+    const response = await AsyncStorage.getItem('levels');
+    const levels = JSON.parse(response);
+    const objContext = letters[context];
+    
+    if (objContext['A'] === true && objContext['E'] === true && objContext['I'] === true && objContext['O'] === true && objContext['U'] === true) {
+        levels[context]['secondLevel'] = true;
+        AsyncStorage.setItem('levels', JSON.stringify(levels))
+    } 
+    
+    if (objContext['B'] === true && objContext['P'] === true && objContext['T'] === true && objContext['D'] === true && objContext['G'] === true) {
+        console.log("passou")
+        levels[context]['thirdLevel'] = true;
+        AsyncStorage.setItem('levels', JSON.stringify(levels))
+    } 
+    
+    if (objContext['S'] === true && objContext['V'] === true && objContext['F'] === true && objContext['Z'] === true && objContext['X'] === true) {
+        levels[context]['fourthLevel'] = true;
+        AsyncStorage.setItem('levels', JSON.stringify(levels))
+    } 
+    
+    if (objContext['M'] === true && objContext['N'] === true && objContext['R'] === true && objContext['L']) {
+        levels[context]['fifthLevel'] = true;
+        AsyncStorage.setItem('levels', JSON.stringify(levels))
+    }
+
+    console.log("verificando")
 }
