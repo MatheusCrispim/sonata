@@ -113,7 +113,10 @@ class Game extends Component {
 
 
     playerSound() {
-        const sound = new SoundPlayer('teste.mp3', SoundPlayer.MAIN_BUNDLE, (error) => {
+        const letra = String(this.props.navigation.state.params.letra).toLowerCase();
+        const path = `letra_${letra}.mp3`;
+        console.log(path)
+        const sound = new SoundPlayer(path, SoundPlayer.MAIN_BUNDLE, (error) => {
             if (error) {
                 console.log('error')
             }
@@ -135,8 +138,6 @@ class Game extends Component {
     toggleModal = () => {
         this.setState({ showModal: !this.state.showModal });
     };
-
-    alghoritmRamdom
 
     render() {
         const letra = this.props.navigation.state.params.letra;
@@ -178,7 +179,7 @@ class Game extends Component {
 
                         <Image source={{ uri: this.state.currentChallenge.image }} style={{ height: 100, resizeMode: 'stretch', margin: 5 }} />
 
-                        <TouchableOpacity style={styles.sound} onPress={this.toggleModal}>
+                        <TouchableOpacity style={styles.sound} >
                             <Sound name="sound" size={40} color="#000"></Sound>
                         </TouchableOpacity>
                     </View>
