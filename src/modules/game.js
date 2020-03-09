@@ -145,7 +145,7 @@ class Game extends Component {
         return (
             <View style={styles.container}>
 
-                <Modal isVisible={this.state.showModal} backdropOpacity={0.5} animationInTiming={600} animationOutTiming={800}>
+                <Modal hideModalContentWhileAnimating={true} useNativeDriver={true} isVisible={this.state.showModal} backdropOpacity={0.5} animationInTiming={600} animationOutTiming={800}>
                     <View style={styles.modal}>
                         <Image
                             source={require('../assets/images/load.gif')}

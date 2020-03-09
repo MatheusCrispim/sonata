@@ -4,28 +4,30 @@ import { View, StyleSheet, ScrollView, Text, TouchableOpacity, AsyncStorage } fr
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { verifyLevelCompleted } from '../utils/alghoritms'
+import Modal from "react-native-modal";
 
 // import { Container } from './styles';
 
 export default class Letters extends Component {
 
     state = {
-        levels: { },
-        context: this.props.navigation.state.params
+        levels: {},
+        context: this.props.navigation.state.params,
+        showModal: false,
+        auxLetter: null
     }
 
     static navigationOptions = {
         headerTitleStyle: { alignSelf: 'center' },
         title: 'NÍVEL DE JOGO',
     };
-     
+
     componentDidUpdate() {
         this.verifyProgress()
     }
 
     componentDidMount() {
-        this.verifyProgress();        
+        this.verifyProgress();
     }
 
     async verifyProgress() {
@@ -60,9 +62,25 @@ export default class Letters extends Component {
         }
     }
 
-    letra = (letra) => {
-        const params = { letra: letra, context: this.state.context }
+    async letra(letra) {
+        const storageLetters = await AsyncStorage.getItem('letters');
+        const letters = JSON.parse(storageLetters);
+        this.setState({ auxLetter: letra })
+        if (letters[this.state.context][letra] === true) {
+            this.toggleModal();
+        } else {
+            this.goToGame();
+        }
+    };
+
+    goToGame() {
+        this.setState({ showModal: false })
+        const params = { letra: this.state.auxLetter, context: this.state.context }
         this.props.navigation.navigate('Game', params);
+    }
+
+    toggleModal = () => {
+        this.setState({ showModal: !this.state.showModal });
     };
 
     renderOverlay = () => {
@@ -78,6 +96,23 @@ export default class Letters extends Component {
     render() {
         return (
             <View style={styles.container}>
+
+                <Modal useNativeDriver={true} isVisible={this.state.showModal} backdropOpacity={0.5} coverScreen={false} onBackdropPress={() => this.toggleModal()}>
+                    <View style={styles.modal}>
+                        <Text style={styles.textModal}>Oi, você já jogou e venceu com está letra. Deseja jogar novamente ? </Text>
+                        <Text style={{ color: '#000', fontSize: 12, }}>(OBS: Ideal que seja um áudio aqui)</Text>
+                        <View style={styles.containerModalButtons}>
+                            <TouchableOpacity style={styles.buttonModalNo} onPress={() => this.toggleModal()} >
+                                <Text style={styles.textButtonsModal}>Não</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.buttonModalYes} onPress={() => this.goToGame()} >
+                                <Text style={styles.textButtonsModal}>Sim</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                    </View>
+                </Modal>
+
                 <ScrollView contentContainerStyle={styles.scrollView}>
                     <View style={styles.blackboard}>
                         <TouchableOpacity style={styles.onePosition} onPress={() => this.letra('A')} >
@@ -97,67 +132,67 @@ export default class Letters extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style={!this.state.levels.secondLevel ? styles.blackboardBlocked : styles.blackboard}>
-                        <TouchableOpacity style={styles.onePosition} onPress={this.state.levels.secondLevel ? () => this.letra('B'): null} >
+                        <TouchableOpacity style={styles.onePosition} onPress={this.state.levels.secondLevel ? () => this.letra('B') : null} >
                             <Text style={styles.letter}>b</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.secondPosition} onPress={this.state.levels.secondLevel ? () => this.letra('P'): null}>
+                        <TouchableOpacity style={styles.secondPosition} onPress={this.state.levels.secondLevel ? () => this.letra('P') : null}>
                             <Text style={styles.letter}>p</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.thirdPosition} onPress={this.state.levels.secondLevel ? () => this.letra('T'): null}>
+                        <TouchableOpacity style={styles.thirdPosition} onPress={this.state.levels.secondLevel ? () => this.letra('T') : null}>
                             <Text style={styles.letter}>t</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.fourthPosition} onPress={this.state.levels.secondLevel ? () => this.letra('D'): null}>
+                        <TouchableOpacity style={styles.fourthPosition} onPress={this.state.levels.secondLevel ? () => this.letra('D') : null}>
                             <Text style={styles.letter}>d</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.fifthPosition} onPress={this.state.levels.secondLevel ? () => this.letra('G'): null}>
+                        <TouchableOpacity style={styles.fifthPosition} onPress={this.state.levels.secondLevel ? () => this.letra('G') : null}>
                             <Text style={styles.letter}>g</Text>
                         </TouchableOpacity>
                         {!this.state.levels.secondLevel ? this.renderOverlay() : null}
                     </View>
                     <View style={!this.state.levels.thirdLevel ? styles.blackboardBlocked : styles.blackboard}>
-                        <TouchableOpacity style={styles.onePosition} onPress={this.state.levels.thirdLevel ? () => this.letra('F'): null}>
+                        <TouchableOpacity style={styles.onePosition} onPress={this.state.levels.thirdLevel ? () => this.letra('F') : null}>
                             <Text style={styles.letter}>f</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.secondPosition} onPress={this.state.levels.thirdLevel ? () => this.letra('S'): null}>
+                        <TouchableOpacity style={styles.secondPosition} onPress={this.state.levels.thirdLevel ? () => this.letra('S') : null}>
                             <Text style={styles.letter}>s</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.thirdPosition} onPress={this.state.levels.thirdLevel ? () => this.letra('V'): null}>
+                        <TouchableOpacity style={styles.thirdPosition} onPress={this.state.levels.thirdLevel ? () => this.letra('V') : null}>
                             <Text style={styles.letter}>v</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.fourthPosition} onPress={this.state.levels.thirdLevel ? () => this.letra('Z'): null}>
+                        <TouchableOpacity style={styles.fourthPosition} onPress={this.state.levels.thirdLevel ? () => this.letra('Z') : null}>
                             <Text style={styles.letter}>z</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.fifthPosition} onPress={this.state.levels.thirdLevel ? () => this.letra('X'): null}>
+                        <TouchableOpacity style={styles.fifthPosition} onPress={this.state.levels.thirdLevel ? () => this.letra('X') : null}>
                             <Text style={styles.letter}>x</Text>
                         </TouchableOpacity>
                         {!this.state.levels.thirdLevel ? this.renderOverlay() : null}
                     </View>
                     <View style={!this.state.levels.fourthLevel ? styles.blackboardBlocked : styles.blackboard}>
-                        <TouchableOpacity style={styles.onePosition} onPress={this.state.levels.fourthLevel ? () => this.letra('M'): null}>
+                        <TouchableOpacity style={styles.onePosition} onPress={this.state.levels.fourthLevel ? () => this.letra('M') : null}>
                             <Text style={styles.letter}>m</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.secondPosition} onPress={this.state.levels.fourthLevel ? () => this.letra('N'): null}>
+                        <TouchableOpacity style={styles.secondPosition} onPress={this.state.levels.fourthLevel ? () => this.letra('N') : null}>
                             <Text style={styles.letter}>n</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.thirdPosition} onPress={this.state.levels.fourthLevel ? () => this.letra('R'): null}>
+                        <TouchableOpacity style={styles.thirdPosition} onPress={this.state.levels.fourthLevel ? () => this.letra('R') : null}>
                             <Text style={styles.letter}>r</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.fourthPosition} onPress={this.state.levels.fourthLevel ? () => this.letra('L'): null}>
+                        <TouchableOpacity style={styles.fourthPosition} onPress={this.state.levels.fourthLevel ? () => this.letra('L') : null}>
                             <Text style={styles.letter}>l</Text>
                         </TouchableOpacity>
                         {!this.state.levels.fourthLevel ? this.renderOverlay() : null}
                     </View>
                     <View style={!this.state.levels.fifthLevel ? styles.blackboardBlocked : styles.blackboard}>
-                        <TouchableOpacity style={styles.onePosition} onPress={this.state.levels.fifthLevel ? () => this.letra('H'): null}>
+                        <TouchableOpacity style={styles.onePosition} onPress={this.state.levels.fifthLevel ? () => this.letra('H') : null}>
                             <Text style={styles.letter}>h</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.secondPosition} onPress={this.state.levels.fifthLevel ? () => this.letra('J'): null}>
+                        <TouchableOpacity style={styles.secondPosition} onPress={this.state.levels.fifthLevel ? () => this.letra('J') : null}>
                             <Text style={styles.letter}>j</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.fourthPosition} onPress={this.state.levels.fifthLevel ? () => this.letra('Q'): null}>
+                        <TouchableOpacity style={styles.fourthPosition} onPress={this.state.levels.fifthLevel ? () => this.letra('Q') : null}>
                             <Text style={styles.letter}>q</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.fifthPosition} onPress={this.state.levels.fifthLevel ? () => this.letra('C'): null}>
+                        <TouchableOpacity style={styles.fifthPosition} onPress={this.state.levels.fifthLevel ? () => this.letra('C') : null}>
                             <Text style={styles.letter}>c</Text>
                         </TouchableOpacity>
                         {!this.state.levels.fifthLevel ? this.renderOverlay() : null}
@@ -225,7 +260,7 @@ const styles = StyleSheet.create({
     letter: {
         fontSize: 36,
         fontWeight: 'normal',
-        color: '#fff'
+        color: '#fff',
     },
 
     onePosition: {
@@ -287,6 +322,55 @@ const styles = StyleSheet.create({
         top: 0,
         bottom: 0,
     },
+
+    modal: {
+        width: 280,
+        height: 200,
+        borderRadius: 10,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center'
+    },
+
+    textModal: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlignVertical: 'center',
+        textAlign: 'center'
+    },
+
+    containerModalButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: 250,
+        marginTop: 20
+    },
+
+    buttonModalYes: {
+        backgroundColor:  '#32CD32',
+        paddingLeft: 30,
+        paddingRight: 30,
+        paddingBottom: 10,
+        paddingTop: 10,
+        borderRadius: 10
+    },
+
+    buttonModalNo: {
+        backgroundColor:  '#FF0000',
+        paddingLeft: 30,
+        paddingRight: 30,
+        paddingBottom: 10,
+        paddingTop: 10,
+        borderRadius: 10
+    },
+
+    textButtonsModal: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '800',
+
+    }
 
 
 })
