@@ -5,8 +5,10 @@ export function alghoritmRandom(array, letter) {
     var listChallengesLetterCorrect = []
     var listChallengesLetterWrong = []
     var listFinal = [];
+
+    arrayShuffled = shuffle(array);
     
-    array.forEach(challeng => {
+    arrayShuffled.forEach(challeng => {
         String(challeng.image).trim();
         if (String(challeng.word).toUpperCase().startsWith(String(letter).toUpperCase())) {
             if (challeng.image !== '' || challeng.image !== undefined || challeng.image !== null) {

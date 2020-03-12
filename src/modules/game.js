@@ -7,9 +7,12 @@ import Sound from 'react-native-vector-icons/AntDesign';
 import { connect } from 'react-redux';
 
 import SoundPlayer from 'react-native-sound';
+// import SoundPlayer from 'react-native-sound-player'
 import Modal from "react-native-modal";
 
 import { alghoritmRandom, shuffle } from '../utils/alghoritms'
+
+import * as data from '../utils/audios.json';
 
 
 
@@ -23,7 +26,8 @@ class Game extends Component {
         hits: 0,
         stars: 5,
         list: [],
-        showModal: true
+        showModal: true,
+        wordAudio: ''
     }
 
     shuffle(array) {
@@ -69,8 +73,8 @@ class Game extends Component {
 
         let challengeId = this.state.challengeId + 1;
         this.setState({ currentChallenge: this.state.list[challengeId], challengeId: challengeId });
-
-
+        word = String(this.state.currentChallenge.word).toLowerCase();
+        this.setState({wordAudio: data[this.props.navigation.state.params.context][word]})
     }
 
     wrong = () => {
@@ -120,7 +124,21 @@ class Game extends Component {
             if (error) {
                 console.log('error')
             }
+            // console.log(sound.play())
+            sound.play();
+        });
+    }
 
+    playerSoundWord() {
+        // console.log(this.state.currentChallenge.word)
+        // const url = 'https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Banana.mp3?alt=media&token=83aff6f8-b4bf-4895-a57c-b8e4f30b0e58'
+        word = String(this.state.currentChallenge.word).toLowerCase();
+        console.log(word)
+        const url = data[this.props.navigation.state.params.context][word];
+        const sound = new SoundPlayer(url, SoundPlayer.MAIN_BUNDLE, (error) => {
+            if (error) {
+                console.log('error')
+            }
             // console.log(sound.play())
             sound.play();
         });
@@ -179,7 +197,7 @@ class Game extends Component {
 
                         <Image source={{ uri: this.state.currentChallenge.image }} style={{ height: 100, resizeMode: 'stretch', margin: 5 }} />
 
-                        <TouchableOpacity style={styles.sound} >
+                        <TouchableOpacity style={styles.sound} onPress={() => this.playerSoundWord()} >
                             <Sound name="sound" size={40} color="#000"></Sound>
                         </TouchableOpacity>
                     </View>

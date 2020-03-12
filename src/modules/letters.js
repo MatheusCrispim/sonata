@@ -144,9 +144,9 @@ export default class Letters extends Component {
                         <TouchableOpacity style={styles.fourthPosition} onPress={this.state.levels.secondLevel ? () => this.letra('D') : null}>
                             <Text style={styles.letter}>d</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.fifthPosition} onPress={this.state.levels.secondLevel ? () => this.letra('G') : null}>
+                        {/* <TouchableOpacity style={styles.fifthPosition} onPress={this.state.levels.secondLevel ? () => this.letra('G') : null}>
                             <Text style={styles.letter}>g</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                         {!this.state.levels.secondLevel ? this.renderOverlay() : null}
                     </View>
                     <View style={!this.state.levels.thirdLevel ? styles.blackboardBlocked : styles.blackboard}>
