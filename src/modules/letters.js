@@ -3,8 +3,14 @@ import React, { Component } from 'react';
 import { View, StyleSheet, ScrollView, Text, TouchableOpacity, AsyncStorage } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Sound from 'react-native-vector-icons/AntDesign';
 
 import Modal from "react-native-modal";
+
+import SoundPlayer from 'react-native-sound';
+
+const sound1 = new SoundPlayer('letter_again_1.mp3', SoundPlayer.MAIN_BUNDLE);
+const sound2 = new SoundPlayer('letter_again_2.mp3', SoundPlayer.MAIN_BUNDLE);
 
 // import { Container } from './styles';
 
@@ -68,10 +74,25 @@ export default class Letters extends Component {
         this.setState({ auxLetter: letra })
         if (letters[this.state.context][letra] === true) {
             this.toggleModal();
+            this.playSound()
         } else {
             this.goToGame();
         }
     };
+
+    playSound() {
+        sound1.play();
+        setTimeout(() => {
+            sound2.play();
+        }, 3300)
+    }
+
+    stopSound() {
+        sound1.stop();
+        setTimeout(() => {
+            sound2.stop();
+        }, 3300)
+    }
 
     goToGame() {
         this.setState({ showModal: false })
@@ -80,6 +101,7 @@ export default class Letters extends Component {
     }
 
     toggleModal = () => {
+        this.stopSound()
         this.setState({ showModal: !this.state.showModal });
     };
 
@@ -99,8 +121,10 @@ export default class Letters extends Component {
 
                 <Modal useNativeDriver={true} isVisible={this.state.showModal} backdropOpacity={0.5} coverScreen={false} onBackdropPress={() => this.toggleModal()}>
                     <View style={styles.modal}>
-                        <Text style={styles.textModal}>Oi, você já jogou e venceu com está letra. Deseja jogar novamente ? </Text>
-                        <Text style={{ color: '#000', fontSize: 12, }}>(OBS: Ideal que seja um áudio aqui)</Text>
+                        <Text style={styles.textModal}>Você já jogou com está letra. Quer jogar novamente ? </Text>
+                        <TouchableOpacity style={styles.sound} onPress={() => this.playSound()}>
+                            <Sound name="sound" size={30} color="#000"></Sound>
+                        </TouchableOpacity>
                         <View style={styles.containerModalButtons}>
                             <TouchableOpacity style={styles.buttonModalNo} onPress={() => this.toggleModal()} >
                                 <Text style={styles.textButtonsModal}>Não</Text>
@@ -337,7 +361,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         textAlignVertical: 'center',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginLeft: 10,
+        marginRight: 10,
+        marginBottom: 5
     },
 
     containerModalButtons: {

@@ -36,7 +36,7 @@ class Context extends Component {
                             </ImageBackground>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.contentTouch} onPress={()=>this.selectContenxt(30, 'animais')}>
+                    <TouchableOpacity style={styles.contentTouch} >
                         <View style={styles.contentView}>
                             <Text style={{ color: "#FFF", fontSize: 18, marginBottom: -33 }}>ANIMAIS</Text>
                             <ImageBackground source={require("../assets/images/cloud.png")} style={styles.contentImageBackground}>
@@ -47,7 +47,7 @@ class Context extends Component {
                             </ImageBackground>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.contentTouch} onPress={()=>this.selectContenxt(9, 'escola')}>
+                    <TouchableOpacity style={styles.contentTouch} >
                         <View style={styles.contentView}>
                             <Text style={{ color: "#FFF", fontSize: 18, marginBottom: -33 }}>ESCOLA</Text>
                             <ImageBackground source={require("../assets/images/cloud.png")} style={styles.contentImageBackground}>
@@ -58,7 +58,7 @@ class Context extends Component {
                             </ImageBackground>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.contentTouch} onPress={()=>this.selectContenxt(10, 'casa')}>
+                    <TouchableOpacity style={styles.contentTouch} >
                         <View style={[styles.contentView, {marginBottom:38}]}>
                             <Text style={{ color: "#FFF", fontSize: 18, marginBottom: -33 }}>CASA</Text>
                             <ImageBackground source={require("../assets/images/cloud.png")} style={styles.contentImageBackground}>

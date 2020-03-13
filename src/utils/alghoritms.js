@@ -5,18 +5,36 @@ export function alghoritmRandom(array, letter) {
     var listChallengesLetterCorrect = []
     var listChallengesLetterWrong = []
     var listFinal = [];
+    var has_word = false;
 
     arrayShuffled = shuffle(array);
     
     arrayShuffled.forEach(challeng => {
+        has_word = false;
         String(challeng.image).trim();
         if (String(challeng.word).toUpperCase().startsWith(String(letter).toUpperCase())) {
             if (challeng.image !== '' || challeng.image !== undefined || challeng.image !== null) {
-                listChallengesLetterCorrect.push(challeng);
+                listChallengesLetterWrong.forEach(e => {
+                    if (String(e.word).toUpperCase() === String(challeng.word).toUpperCase()) {
+                        has_word = true;
+                        return;
+                    }
+                });
+                if (!has_word) {
+                    listChallengesLetterWrong.push(challeng);
+                }
             }
         } else {
             if (challeng.image !== '' || challeng.image !== undefined || challeng.image !== null) {
-                listChallengesLetterWrong.push(challeng);
+                listChallengesLetterWrong.forEach(e => {
+                    if (String(e.word).toUpperCase() === String(challeng.word).toUpperCase()) {
+                        has_word = true;
+                        return;
+                    }
+                });
+                if (!has_word) {
+                    listChallengesLetterWrong.push(challeng);
+                }
             }
         }
     });
@@ -72,7 +90,7 @@ export async function verifyLevelCompleted(letters, context) {
         AsyncStorage.setItem('levels', JSON.stringify(levels))
     } 
     
-    if (objContext['B'] === true && objContext['P'] === true && objContext['T'] === true && objContext['D'] === true && objContext['G'] === true) {
+    if (objContext['B'] === true && objContext['P'] === true && objContext['T'] === true && objContext['D'] === true) {
         console.log("passou")
         levels[context]['thirdLevel'] = true;
         AsyncStorage.setItem('levels', JSON.stringify(levels))
@@ -87,6 +105,8 @@ export async function verifyLevelCompleted(letters, context) {
         levels[context]['fifthLevel'] = true;
         AsyncStorage.setItem('levels', JSON.stringify(levels))
     }
+
+    if (objContext['C'] === true && objContext['Q'] === true && objContext['G'] === true && objContext['J'])
 
     console.log("verificando")
 }

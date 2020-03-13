@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import { View, Text, StyleSheet, Image, TouchableOpacity, AsyncStorage } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
 import context from './context';
 
 // import { Container } from './styles';
@@ -28,7 +29,7 @@ export default class Play extends Component {
         }
         
         if (!letters) {
-            var lettersContexts = { 'A': false, 'E': false, 'I': false, 'O': false, 'U': false, 'B': false, 'P': false, 'T': false, 'D': false, 'G': false, 'F': false,'S': false,'V': false, 'Z': false, 'X': false, 'L': false, 'M': false, 'N': false, 'R': false, 'J': false, 'H': false, 'Q': false, 'C': false};
+            var lettersContexts = { 'A': false, 'E': false, 'I': false, 'O': false, 'U': false, 'B': false, 'P': false, 'T': false, 'D': false, 'F': false,'S': false,'V': false, 'Z': false, 'X': false, 'L': false, 'M': false, 'N': false, 'R': false, 'J': false, 'G': false, 'Q': false, 'C': false};
             var contexts = {
                 frutas: lettersContexts,
                 casa: lettersContexts,

@@ -27,6 +27,7 @@ class Game extends Component {
         stars: 5,
         list: [],
         showModal: true,
+        showModalError: false,
         wordAudio: ''
     }
 
@@ -69,22 +70,37 @@ class Game extends Component {
             this.hitSound();
         } else {
             this.state.stars--;
+            // this.setState({ showModalError: true })
+            this.wrongSound()
+            // if (this.state.stars >= 1) {
+            //     this.setState({ showModalError: true })
+            //     setTimeout(async () => {
+            //         this.setState({ showModalError: false })
+            //     }, 1500)
+            // }
         }
 
         let challengeId = this.state.challengeId + 1;
         this.setState({ currentChallenge: this.state.list[challengeId], challengeId: challengeId });
         word = String(this.state.currentChallenge.word).toLowerCase();
-        this.setState({wordAudio: data[this.props.navigation.state.params.context][word]})
+        this.setState({ wordAudio: data[this.props.navigation.state.params.context][word] })
     }
 
     wrong = () => {
         const letra = this.props.navigation.state.params.letra
         if (!this.state.currentChallenge.word.toUpperCase().startsWith(letra)) {
             this.state.hits++;
-            console.log(this.hits)
+
             this.hitSound();
         } else {
             this.state.stars--;
+            this.wrongSound();
+            // if (this.state.stars < 4) {
+            //     this.setState({ showModalError: true })
+            //     setTimeout(async () => {
+            //         this.setState({ showModalError: false })
+            //     }, 1500)
+            // }
         }
 
         let challengeId = this.state.challengeId + 1;
@@ -153,6 +169,15 @@ class Game extends Component {
         });
     }
 
+    wrongSound() {
+        const sound = new SoundPlayer('oooh.mp3', SoundPlayer.MAIN_BUNDLE, (error) => {
+            if (error) {
+                console.log('error')
+            }
+            sound.play();
+        });
+    }
+
     toggleModal = () => {
         this.setState({ showModal: !this.state.showModal });
     };
@@ -167,9 +192,18 @@ class Game extends Component {
                     <View style={styles.modal}>
                         <Image
                             source={require('../assets/images/load.gif')}
-                            style={{ width: 100, height: 100 }}
+                            style={{ width: 80, height: 80 }}
                         />
                         <Text>Carregando jogo...</Text>
+                    </View>
+                </Modal>
+
+                <Modal hideModalContentWhileAnimating={true} useNativeDriver={true} isVisible={this.state.showModalError} backdropOpacity={0.5} animationInTiming={300} animationOutTiming={800} onBackdropPress={() => this.setState({ showModalError: false })}>
+                    <View style={styles.modalError}>
+                        <Image
+                            source={require('../assets/images/ghost2.png')}
+                            style={{ width: 100, height: 100 }}
+                        />
                     </View>
                 </Modal>
 
@@ -363,6 +397,16 @@ const styles = StyleSheet.create({
         height: 200,
         borderRadius: 10,
         backgroundColor: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center'
+    },
+
+    modalError: {
+        width: 250,
+        height: 200,
+        borderRadius: 10,
+        backgroundColor: '#46C0F8',
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center'

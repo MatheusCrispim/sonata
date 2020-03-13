@@ -44,7 +44,7 @@ export default class extends Component {
     }
 
     refresh() {
-        console.log('volta mzr')
+        // console.log('volta mzr')
     }
 
     render() {
