@@ -14,6 +14,8 @@ import { alghoritmRandom, shuffle } from '../utils/alghoritms'
 
 import * as data from '../utils/audios.json';
 
+import ProgressBar from 'react-native-progress/Bar';
+
 
 
 // import { Container } from './styles';
@@ -28,7 +30,8 @@ class Game extends Component {
         list: [],
         showModal: true,
         showModalError: false,
-        wordAudio: ''
+        wordAudio: '',
+        hitsProgress: 0
     }
 
     shuffle(array) {
@@ -47,9 +50,11 @@ class Game extends Component {
     componentDidMount(props) {
         console.log(this.props.navigation.state.params)
         if (this.props.challenges.data.length > 0) {
-            this.state.list = alghoritmRandom(this.props.challenges.data, this.props.navigation.state.params);
-            this.setState({ currentChallenge: this.state.list[0] });
+            const listAux = alghoritmRandom(this.props.challenges.data, this.props.navigation.state.params.letra);
+            this.setState({ list: listAux })
+            
             setTimeout(() => {
+                this.setState({ currentChallenge: this.state.list[0] });
                 this.setState({ showModal: false })
             }, 2000)
         }
@@ -67,6 +72,9 @@ class Game extends Component {
         let letra = this.props.navigation.state.params.letra
         if (this.state.currentChallenge.word.toUpperCase().startsWith(letra)) {
             this.state.hits++;
+            this.setState({hitsProgress: (this.state.hits / 10) * 2})
+            console.log(this.state.hitsProgress)
+
             this.hitSound();
         } else {
             this.state.stars--;
@@ -90,7 +98,8 @@ class Game extends Component {
         const letra = this.props.navigation.state.params.letra
         if (!this.state.currentChallenge.word.toUpperCase().startsWith(letra)) {
             this.state.hits++;
-
+            this.setState({hitsProgress: (this.state.hits / 10) * 2})
+            console.log(this.state.hitsProgress)
             this.hitSound();
         } else {
             this.state.stars--;
@@ -150,7 +159,7 @@ class Game extends Component {
         // const url = 'https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Banana.mp3?alt=media&token=83aff6f8-b4bf-4895-a57c-b8e4f30b0e58'
         word = String(this.state.currentChallenge.word).toLowerCase();
         console.log(word)
-        const url = data[this.props.navigation.state.params.context][word];
+        const url = data[this.props.navigation.state.params.context][word] ? data[this.props.navigation.state.params.context][word] : null;
         const sound = new SoundPlayer(url, SoundPlayer.MAIN_BUNDLE, (error) => {
             if (error) {
                 console.log('error')
@@ -219,6 +228,11 @@ class Game extends Component {
                     <Icon name="star" size={50} color={this.state.stars >= 4 ? "#EFCE4A" : '#808080'} />
                     <Icon name="star" size={50} color={this.state.stars === 5 ? "#EFCE4A" : '#808080'} />
                 </View>
+
+                <View style={styles.progress}>
+                    <ProgressBar style={styles.progressShadow} progress={this.state.hitsProgress} width={null} height={8} color={'rgba(50, 138, 67, 1)'} unfilledColor={'rgba(255, 255, 255, 1)'} borderColor={'rgba(255, 255, 255, 1)'} borderRadius={0} useNativeDriver={true} />
+                </View>
+
 
                 <View style={styles.containerCenter}>
                     <View style={styles.containerLetter}>
@@ -294,7 +308,11 @@ const styles = StyleSheet.create({
         marginRight: 10,
         height: 70,
         backgroundColor: '#fff',
-        borderRadius: 2,
+        // borderRadius: 2,
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0,
+        borderTopLeftRadius: 2,
+        borderTopRightRadius: 2,
         shadowColor: 'black',
         shadowOpacity: 0.9,
         elevation: 8,
@@ -410,6 +428,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center'
+    },
+
+    progress: {
+        marginLeft: 10,
+        marginRight: 10,
+    },
+
+    progressShadow: {
+        shadowColor: 'black',
+        shadowOpacity: 0.9,
+        elevation: 8,
     }
 
 })

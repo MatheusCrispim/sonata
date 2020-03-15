@@ -9,8 +9,7 @@ import Modal from "react-native-modal";
 
 import SoundPlayer from 'react-native-sound';
 
-const sound1 = new SoundPlayer('letter_again_1.mp3', SoundPlayer.MAIN_BUNDLE);
-const sound2 = new SoundPlayer('letter_again_2.mp3', SoundPlayer.MAIN_BUNDLE);
+const sound = new SoundPlayer('letter_again.mp3', SoundPlayer.MAIN_BUNDLE);
 
 // import { Container } from './styles';
 
@@ -81,17 +80,11 @@ export default class Letters extends Component {
     };
 
     playSound() {
-        sound1.play();
-        setTimeout(() => {
-            sound2.play();
-        }, 3300)
+        sound.play();
     }
 
     stopSound() {
-        sound1.stop();
-        setTimeout(() => {
-            sound2.stop();
-        }, 3300)
+        sound.stop();
     }
 
     goToGame() {
@@ -207,8 +200,8 @@ export default class Letters extends Component {
                         {!this.state.levels.fourthLevel ? this.renderOverlay() : null}
                     </View>
                     <View style={!this.state.levels.fifthLevel ? styles.blackboardBlocked : styles.blackboard}>
-                        <TouchableOpacity style={styles.onePosition} onPress={this.state.levels.fifthLevel ? () => this.letra('H') : null}>
-                            <Text style={styles.letter}>h</Text>
+                        <TouchableOpacity style={styles.onePosition} onPress={this.state.levels.fifthLevel ? () => this.letra('G') : null}>
+                            <Text style={styles.letter}>g</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.secondPosition} onPress={this.state.levels.fifthLevel ? () => this.letra('J') : null}>
                             <Text style={styles.letter}>j</Text>

@@ -10,36 +10,21 @@ export function alghoritmRandom(array, letter) {
     arrayShuffled = shuffle(array);
     
     arrayShuffled.forEach(challeng => {
-        has_word = false;
         String(challeng.image).trim();
         if (String(challeng.word).toUpperCase().startsWith(String(letter).toUpperCase())) {
             if (challeng.image !== '' || challeng.image !== undefined || challeng.image !== null) {
-                listChallengesLetterWrong.forEach(e => {
-                    if (String(e.word).toUpperCase() === String(challeng.word).toUpperCase()) {
-                        has_word = true;
-                        return;
-                    }
-                });
-                if (!has_word) {
-                    listChallengesLetterWrong.push(challeng);
-                }
+                listChallengesLetterCorrect.push(challeng);
             }
         } else {
             if (challeng.image !== '' || challeng.image !== undefined || challeng.image !== null) {
-                listChallengesLetterWrong.forEach(e => {
-                    if (String(e.word).toUpperCase() === String(challeng.word).toUpperCase()) {
-                        has_word = true;
-                        return;
-                    }
-                });
-                if (!has_word) {
-                    listChallengesLetterWrong.push(challeng);
-                }
+                listChallengesLetterWrong.push(challeng);
             }
         }
     });
 
     listFinal = joinLists(listChallengesLetterCorrect, listChallengesLetterWrong);
+
+    console.log(listFinal)
 
     listChallenges = shuffle(listFinal);
     return listChallenges
