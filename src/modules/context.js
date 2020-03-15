@@ -12,7 +12,7 @@ class Context extends Component {
 
     static navigationOptions = {
         headerTitleStyle: { alignSelf: 'center' },
-        title: 'TIPO DE JOGO',
+        title: 'CONTEXTO DO JOGO',
     };
 
     selectContenxt = (id, name)=>{
