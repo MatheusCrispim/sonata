@@ -89,6 +89,7 @@ export default class Letters extends Component {
 
     goToGame() {
         this.setState({ showModal: false })
+        this.stopSound();
         const params = { letra: this.state.auxLetter, context: this.state.context }
         this.props.navigation.navigate('Game', params);
     }
