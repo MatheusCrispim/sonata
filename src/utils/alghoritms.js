@@ -6,8 +6,18 @@ export function alghoritmRandom(array, letter) {
     var listChallengesLetterWrong = []
     var listFinal = [];
     var has_word = false;
+    var listByUser = []
 
-    arrayShuffled = shuffle(array);
+    console.log(array.length)
+
+    array.forEach(e => {
+        if(e.authorId === 26) {
+            listByUser.push(e)
+        }
+    });
+    console.log(listByUser.length)
+
+    arrayShuffled = shuffle(listByUser);
     
     arrayShuffled.forEach(challeng => {
         String(challeng.image).trim();

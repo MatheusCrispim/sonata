@@ -134,7 +134,7 @@
         "dragao-de-komodo": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FDrag%C3%A3o-de-komodo.mp3?alt=media&token=7b64726b-0bbb-4875-b0ad-71030b3d7a0e",
         "dragao": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FDrag%C3%A3o.mp3?alt=media&token=58e62689-9fb5-409c-bcfe-f8383bc1d4b0",
         "elefante": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FElefante.mp3?alt=media&token=9297ab57-3e0a-4244-9ef7-ea09f91ebdee",
-        "escorpiao": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FEscorpi%C3%A3o.mp3?alt=media&token=c8e24a8f-55ba-4a53-82c4-ccd462ffd6f3",
+        "escorpião": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FEscorpi%C3%A3o.mp3?alt=media&token=c8e24a8f-55ba-4a53-82c4-ccd462ffd6f3",
         "estrela-do-mar": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FEstrela-do-Mar.mp3?alt=media&token=cd6f6bfe-47f6-431b-aa39-ae4c1ff8c820",
         "falcão": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FFalc%C3%A3o.mp3?alt=media&token=4674c5cc-2b60-4033-97a7-ad36302e358f",
         "flamingo": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FFlamingo.mp3?alt=media&token=30b7c12c-fd65-4a78-abc2-5d67add89cb7",
@@ -150,11 +150,11 @@
         "golfinho": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FGolfinho.mp3?alt=media&token=aa10c22e-e801-496c-adfd-568d3cbb9701",
         "guaxinim": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FGuaxinim.mp3?alt=media&token=7aac2bf8-1052-498b-a0d9-b4a1521ef2f8",
         "iguana": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FIgu%20ana.mp3?alt=media&token=42b78a68-cdec-42be-86f4-ac15935b04f7",
-        "jacare": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FJacar%C3%A9.mp3?alt=media&token=d6b3fd0e-e237-44b0-b6b9-aea21a29c7ae",
+        "jacaré": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FJacar%C3%A9.mp3?alt=media&token=d6b3fd0e-e237-44b0-b6b9-aea21a29c7ae",
         "javali": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FJavali.mp3?alt=media&token=bd29d049-344d-4c95-8ace-a4b6dcdd346c",
         "joaninha": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FJoaninha.mp3?alt=media&token=1972fc39-4b1c-4bc6-bd4d-01f2177d45e8",
         "lagartixa": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FLagartixa.mp3?alt=media&token=0a816fb6-bb4b-4710-99f0-e044453c6e3c",
-        "leao": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FLe%C3%A3o.mp3?alt=media&token=93b8331f-598d-467a-a473-8d5774f691b9",
+        "leão": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FLe%C3%A3o.mp3?alt=media&token=93b8331f-598d-467a-a473-8d5774f691b9",
         "lobo": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FLobo.mp3?alt=media&token=5d4b5bca-8e5a-464f-b846-9b4e91bcaad6",
         "lula": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FLula.mp3?alt=media&token=1f9838ef-c30a-4a23-bb11-ad6a4c6fd79f",
         "minhoca": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FMInhoca.mp3?alt=media&token=83a28381-997c-42bf-b900-55d9afb102aa",
@@ -174,7 +174,7 @@
         "papagaio": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FPapagaio.mp3?alt=media&token=ef50ef33-a811-4599-915d-0215785cb24b",
         "pardal": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FPardal.mp3?alt=media&token=11c306ce-d8a2-4198-9305-c2cb9e9e557c",
         "pato": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FPato.mp3?alt=media&token=f31c17a5-5d6d-4a2a-b0ea-a5264734edb1",
-        "pavao": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FPav%C3%A3o.mp3?alt=media&token=046f49f6-95a8-441d-bd9e-3c9ac234c848",
+        "pavão": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FPav%C3%A3o.mp3?alt=media&token=046f49f6-95a8-441d-bd9e-3c9ac234c848",
         "peixe": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FPeixe.mp3?alt=media&token=f07575cc-39aa-4ff1-89d8-bebb98766b67",
         "pelicano": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FPelicano.mp3?alt=media&token=98773a08-66e5-4ca2-8c86-f0c77f9e5eff",
         "peru": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FPeru.mp3?alt=media&token=06c4f9c7-5dad-46c6-b6ca-32814e1913b4",
@@ -202,6 +202,9 @@
         "urubu": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FUrubu.mp3?alt=media&token=5d059fe8-9cb0-4c2c-a4d1-d2762623a1ed",
         "vaca": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FVaca.mp3?alt=media&token=538c1691-701a-4c91-b2e5-da57189f8f46",
         "vagalume": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FVagalume.mp3?alt=media&token=1a92b7a6-a131-4239-8293-39084a4210e8",
-        "aguia": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2F%C3%81guia.mp3?alt=media&token=75efebef-417f-4ebe-934d-05c9be2609f0"
+        "aguia": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2F%C3%81guia.mp3?alt=media&token=75efebef-417f-4ebe-934d-05c9be2609f0",
+        "urso": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FUrso.mp3?alt=media&token=d50db07b-6df6-401d-bf05-3a667340f7c6",
+        "zebra": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FZebra.mp3?alt=media&token=cba6319d-caa7-45e5-bc42-654eaa1e3aac",
+        "veado": "https://firebasestorage.googleapis.com/v0/b/sonata-b8bcb.appspot.com/o/Animais%2FVeado.mp3?alt=media&token=8ce67fb6-bf34-4ecf-ba12-c64ac49457cf"
     }
 }
