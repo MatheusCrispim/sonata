@@ -243,7 +243,7 @@ class Game extends Component {
                     </View>
                     <View style={styles.containerImage}>
 
-                        <Image source={{ uri: this.state.currentChallenge.image }} style={{ height: 100, resizeMode: 'stretch', margin: 5 }} />
+                        <Image source={{ uri: this.state.currentChallenge.image }} style={{ height: 135, resizeMode: 'contain', margin: 5 }} />
 
                         <TouchableOpacity style={styles.sound} onPress={() => this.playerSoundWord()} >
                             <Sound name="sound" size={40} color="#000"></Sound>
